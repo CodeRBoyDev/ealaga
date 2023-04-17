@@ -1,0 +1,44 @@
+[
+    
+      {
+        "_id": "req1",
+        "description": "Medical Abstract or History"
+       
+      },
+      {
+        "_id": "req2",
+        "description": "Pinakahuling Hepatitis Profile - HBsAg, anti-HCV, anti-HBs \n (nakuha sa nakaraang tatlong buwan)"
+       
+      },
+      {
+        "_id": "req3",
+        "description": "Pinakahuling Complete Blood Count (CBC) \n (nakuha sa nakaraang buwan)"
+       
+      },
+      {
+        "_id": "req4",
+        "description": "Pinakahuling resulta ng Creatin, K, Ca, Phosphorus, Albumin \n (nakuha sa nakaraang buwan)"
+       
+      },
+      {
+        "_id": "req5",
+        "description": "Swab Test Result \n (nakuha sa nakaraang dalawang linggo)"
+       
+      },
+      {
+        "_id": "req6",
+        "description": "Chest X-ray \n (nakuha sa nakaraang anim buwan)"
+       
+      },
+      {
+        "_id": "req7",
+        "description": "Kopya ng Treatment Monitoring Sheet/Record (Huling tatlong treatment) mula sa huling dialysis center"
+       
+      },
+      {
+        "_id": "req8",
+        "description": "Voter's Registration/Certificate or any Valid ID"
+       
+      }
+    
+]
