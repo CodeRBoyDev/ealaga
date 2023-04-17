@@ -20,7 +20,7 @@ import io from "socket.io-client";
 // const ENDPOINT = "http://localhost:4000"; //development
 // const ENDPOINT = "https://ealaga.vercel.app"; //for deployment -production
 // const ENDPOINT = "https://ealaga-5v97.onrender.com/"; //for deployment -production
-const ENDPOINT = "https://ealaga.up.railway.app/"; //for deployment -production
+const ENDPOINT = "https://ealaga-production.up.railway.app/"; //for deployment -production
 
 // const ENDPOINT = "https://ealaga-server.vercel.app"; //for deployment -production
 

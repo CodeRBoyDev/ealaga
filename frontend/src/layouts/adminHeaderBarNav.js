@@ -24,7 +24,7 @@ import io from "socket.io-client";
 
 // const ENDPOINT = "https://ealaga.vercel.app"; //for deployment -production
 // const ENDPOINT = "https://ealaga-server.onrender.com"; //for deployment -production
-const ENDPOINT = "https://ealaga.up.railway.app/"; //for deployment -production
+const ENDPOINT = "https://ealaga-production.up.railway.app/"; //for deployment -production
 // const ENDPOINT = "https://ealaga-server.vercel.app"; //for deployment -production
 
 var socket, selectedChatCompare;
