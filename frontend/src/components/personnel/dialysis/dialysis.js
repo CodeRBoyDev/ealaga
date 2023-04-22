@@ -271,7 +271,12 @@ const theme = createTheme({
 //================================================================================================================
 
         const [getDialysis, setgetDialysis] = useState([]); 
+        const [getDialysisPatient, setgetDialysisPatient] = useState([]); 
+
         const [getViewApplicant, setViewApplicant] = useState({}); 
+        const [getViewApplicantDialysis, setViewApplicantDialysis] = useState([]); 
+
+        const [getBatches, setBatches] = useState(false);
 
           const fetchDialysis= () => {
             axios({
@@ -284,6 +289,7 @@ const theme = createTheme({
             },
             }).then(response => {
               setgetDialysis(response.data.allDialysis);
+              setgetDialysisPatient(response.data.allDialysisPatient)
               setIsLoadingsss(false);
 
           }).catch((err) => console.log(err));
@@ -293,54 +299,144 @@ const theme = createTheme({
             fetchDialysis();
           },[]);
 
-          console.log(getDialysis);
+          // console.log(getDialysis);
 
-          var data = {
-            columns: ["ID","Full Name", "Dialysis Status","Action"],
-            rows: []
-        }
-        getDialysis?.forEach(getDialysis => {
-                data.rows.push([
-                  getDialysis._id,
-                  [getDialysis.user_id?.last_name,", ",getDialysis.user_id?.first_name," ",getDialysis.user_id?.middle_name],
-                  !getDialysis.dialysis_status ? "Pending" : getDialysis.dialysis_status,
 
-                  getDialysis.dialysis_status == "accepted" || getDialysis.dialysis_status == "denied" 
-                  ?
+            //=============filter batch
 
+
+          const [getBatchyears, setBatchyears] = useState({years: moment().year()});
+
+            const YearMonths = [];
+
+            // Get current year
+            // const currentYears = moment(getBatchyears.years).year();
+            
+            // Loop through each month of the year
+            for (let i = 0; i < 12; i++) {
+              // Get month name with year
+              const monthNameWithYear = moment().month(i).year(getBatchyears.years).format('MMMM YYYY');
+            
+              // Add month name with year to array
+              YearMonths.push(monthNameWithYear);
+            }
+
+
+            const startYear = 2019;
+            const endYear = moment().year();
+
+            // create an array to store the years
+            const yearsData = [];
+
+            // loop through the years and push them into the array
+            for (let year = startYear; year <= endYear; year++) {
+              yearsData.push(year);
+            }
+
+   
+        const [getBatch, setBatch] = useState({batch: moment().format('MMMM YYYY')});
+
+        const onChangeBatch = e => {
+          setBatch({ batch: e.target.value});
+        };
+
+        const onChangeBatchYears = e => {
+          setBatchyears({ years: e.target.value});
+        };
+
+        const onAll = () => {
+          setBatch({batch: moment().format('MMMM YYYY')});
+          setBatchyears({years: moment().year()});
+
+        };
+
+        var patgetBatch = getBatch?.batch == "" ? "" : '^'+getBatch?.batch+'$';
+
+        const filteredgetDialysisPatient = getDialysisPatient?.filter(getDialysisPatient => {
+          
+            return getDialysisPatient.batch.match(patgetBatch)
+        });
+
+
+        // ---------------------------------------
+          
+       if(getBatches){
+
+        var data = {
+          columns: ["ID","Full Name", "Email","Barangay", "Batch","Action"],
+          rows: []
+      }
+
+
+      filteredgetDialysisPatient?.forEach(getDialysis => {
+              data.rows.push([
+                getDialysis._id,
+                [getDialysis.user_id?.last_name,", ",getDialysis.user_id?.first_name," ",getDialysis.user_id?.middle_name],
+                getDialysis.user_id?.email,
+                getDialysis.user_id?.address.barangay,
+                getDialysis.batch,
+                <>
+                <Link to="" onClick={() => handleViewApplicant(getDialysis._id)} className="yellowBgButton">
+                View
+                </Link> 
+               
+                </>
+              ])
+      })
+
+       }else{
+        var data = {
+          columns: ["ID","Full Name", "Email","Barangay", "Dialysis Status","Action"],
+          rows: []
+      }
+
+
+      getDialysis?.forEach(getDialysis => {
+              data.rows.push([
+                getDialysis._id,
+                [getDialysis.user_id?.last_name,", ",getDialysis.user_id?.first_name," ",getDialysis.user_id?.middle_name],
+                getDialysis.user_id?.email,
+                getDialysis.user_id?.address.barangay,
+                !getDialysis.dialysis_status ? "Pending" : getDialysis.dialysis_status,
+
+                getDialysis.dialysis_status == "accepted" || getDialysis.dialysis_status == "denied" 
+                ?
+
+                <>
+                <Link to="" onClick={() => handleViewApplicant(getDialysis._id)} className="yellowBgButton">
+                View
+                </Link> 
+               
                   <>
-                  <Link to="" onClick={() => handleViewApplicant(getDialysis._id)} className="yellowBgButton">
-                  View
+                  <Link to="" style={{pointerEvents: "none"}} onClick={() => handleAcceptApplicant(getDialysis._id)}  className="DisablegreenBgButton">
+                  Accept
                   </Link> 
-                 
-                    <>
-                    <Link to="" style={{pointerEvents: "none"}} onClick={() => handleAcceptApplicant(getDialysis._id)}  className="DisablegreenBgButton">
-                    Accept
-                    </Link> 
-                    <Link to=""  style={{pointerEvents: "none"}} onClick={() => handleDeniedApplicant(getDialysis._id)} className="DisableredBgButton">
-                    Denied
-                    </Link> 
-                    </> 
-                  </>
+                  <Link to=""  style={{pointerEvents: "none"}} onClick={() => handleDeniedApplicant(getDialysis._id)} className="DisableredBgButton">
+                  Denied
+                  </Link> 
+                  </> 
+                </>
 
-                  :
+                :
+                <>
+                <Link to="" onClick={() => handleViewApplicant(getDialysis._id)} className="yellowBgButton">
+                View
+                </Link> 
+               
                   <>
-                  <Link to="" onClick={() => handleViewApplicant(getDialysis._id)} className="yellowBgButton">
-                  View
+                  <Link to="" onClick={() => handleAcceptApplicant(getDialysis._id)}  className="greenBgButton">
+                  Accept
                   </Link> 
-                 
-                    <>
-                    <Link to="" onClick={() => handleAcceptApplicant(getDialysis._id)}  className="greenBgButton">
-                    Accept
-                    </Link> 
-                    <Link to=""  onClick={() => handleDeniedApplicant(getDialysis._id)} className="redBgButton">
-                    Denied
-                    </Link> 
-                    </> 
-                  </>
-                  
-                ])
-        })
+                  <Link to=""  onClick={() => handleDeniedApplicant(getDialysis._id)} className="redBgButton">
+                  Denied
+                  </Link> 
+                  </> 
+                </>
+                
+              ])
+      })
+       }
+        
 
 
         const handleViewApplicant = (_id) => {
@@ -372,7 +468,8 @@ const theme = createTheme({
               console.log(response.data)
 
               setViewApplicant(response.data.allDialysis);
-
+              setViewApplicantDialysis(response.data.PatientallDialysis);
+              
                             })
                   .catch(error => {
                                   console.log(error.response);
@@ -412,7 +509,8 @@ const theme = createTheme({
               console.log(response.data)
 
               setViewApplicant(response.data.allDialysis);
-
+              setViewApplicantDialysis(response.data.PatientallDialysis);
+              
                             })
                   .catch(error => {
                                   console.log(error.response);
@@ -440,6 +538,10 @@ for (let i = 1; i <= 12; i++) {
     futureMonths.push(monthNameWithYear);
   }
 }
+
+
+
+
 
 
 
@@ -640,6 +742,9 @@ for (let i = 1; i <= 12; i++) {
 
         
 
+      
+
+
 
 
  ///modal--------------------------
@@ -705,14 +810,119 @@ for (let i = 1; i <= 12; i++) {
         <div style={contentStyle}>
            <div class="container-fluid">
         <br />
-        <h1 style={{color:"rgb(239, 58, 71)"}}><i class="fas fa-procedures"></i>&nbsp;Dialysis</h1>
+        {
+          getBatches ? 
+          <h1 style={{color:"rgb(239, 58, 71)"}}><i class="fas fa-procedures"></i>&nbsp;Dialysis</h1>
+       :
+       <h1 style={{color:"rgb(239, 58, 71)"}}><i class="fas fa-procedures"></i>&nbsp;Today Attendees</h1>
+      
+        } 
         <h5>{moment(new Date()).format("MMMM DD, YYYY dddd ")}</h5>
+        
+          {
+          getBatches ? 
+          <div style={{display: "flex", flexDirection: "row"}}>
+          <Button color="danger"  onClick={()  => setBatches(false)} style={{marginTop: "1vh", marginRight: "2vh"}}><i class="fas fa-window-close"></i>&nbsp; Close Dialysis Batches&nbsp;</Button>
+          <Button outline color="danger" onClick={onAll} style={{marginTop: "1vh", marginRight: "2vh"}}>&nbsp;Reset&nbsp;</Button>
+<FormControl style={{width: "17vh", marginRight: "2vh"}} fullWidth> 
+                        <InputLabel color="secondary" shrink="true"  variant="standard" htmlFor="uncontrolled-native">
+                        Select Year
+                        </InputLabel>
+                        <NativeSelect
+                        onChange={onChangeBatchYears}
+                          inputProps={{
+                            name: 'status',
+                            id: 'uncontrolled-native',
+                          }}
+                          color="secondary"
+                          value={getBatchyears.years}
+                        >
+                            <option value="" selected disabled> <em>Select a Year</em></option>
+                                    {yearsData.map((years, index) => (
+                                        <option value={years}>{years}</option>
+                                      ))}
+                      </NativeSelect>
+                    </FormControl>
+
+              <FormControl style={{width: "17vh", marginRight: "2vh"}} fullWidth> 
+                        <InputLabel color="secondary" shrink="true"  variant="standard" htmlFor="uncontrolled-native">
+                        Select Batch
+                        </InputLabel>
+                        <NativeSelect
+                        onChange={onChangeBatch}
+                          inputProps={{
+                            name: 'status',
+                            id: 'uncontrolled-native',
+                          }}
+                          color="secondary"
+                          value={getBatch.batch}
+                        >
+                            <option value="" selected disabled> <em>Select a Batch</em></option>
+                                    {YearMonths.map((month, index) => (
+                                        <option value={month}>{month}</option>
+                                      ))}
+                      </NativeSelect>
+                    </FormControl>
+      </div>
+          :
+          <Button color="danger"  onClick={()  => setBatches(true)} style={{marginTop: "1vh", marginRight: "2vh"}}><i className="fas fa-calendar-alt"></i>&nbsp;Dialysis Batches&nbsp;</Button>
+          }
+       
+             
         <hr class="sep-2" />
         <SideBar  setSideNavExpanded={setSideNavExpanded} sideNavExpanded={sideNavExpanded} /> 
 
-       
-        {/* <Button style={{ marginBottom: "10px"}} onClick={() => handleShow()} 
-          color="danger"><i className="fas fa-plus"></i>&nbsp;&nbsp;Health Problem</Button> */}
+
+        {
+          getBatches &&
+          <>
+
+
+
+              <div class="container">
+            <div class="row">
+                    <div class="col-md-9">
+                        <div class="wrapper wrapper-content animated fadeInUp">
+                            <div class="ibox">
+                               
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="m-b-md">
+                                                <h2>Batch of {getBatch.batch} </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <dl class="dl-horizontal">
+
+                                                <dt>Start Date:</dt> <dd>First Week of {getBatch.batch}</dd>
+                                                <dt>Total Patient:</dt> <dd>  {filteredgetDialysisPatient ? filteredgetDialysisPatient.length : 0}</dd>
+                                                {/* <dt>Client:</dt> <dd><a href="#" class="text-navy"> Zender Company</a> </dd>
+                                                <dt>Version:</dt> <dd>     v1.4.2 </dd> */}
+                                            </dl>
+                                        </div>
+                                        <div class="col-lg-7" id="cluster_info">
+                                            <dl class="dl-horizontal">
+
+                                                <dt>End Date:</dt> <dd>Last Week of {getBatch.batch}</dd>
+                                                {/* <dt>Created:</dt> <dd> 	10.07.2014 23:36:57 </dd> */}
+                                                {/* <dt>Participants:</dt> */}
+                                            </dl>
+                                        </div>
+                                    </div>
+                          
+                                
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+            </>
+}
+
+     
 
         <ThemeProvider theme={theme}> 
         <MUIDataTable
@@ -799,30 +1009,34 @@ for (let i = 1; i <= 12; i++) {
       <div class="panel-body bio-graph-info">  
        
         
-        <h1 style={{marginTop:"30px !important", "text-decoration": "underline"}}>Dialysis History</h1>
+        <h1 style={{marginTop:"30px !important", }}>Total Batch of Dialysis Attended: {getViewApplicantDialysis?.length}</h1>
     
            
-        <div class="container-fluid" style={{ marginBottom: "-50px" }}>
+        <div class="container-fluid" style={{ marginBottom: "50px" }}>
 
+        
+        {
+      getViewApplicantDialysis?.length == 0
+       ? 
+       <h3 style={{ fontWeight: "bold",marginBottom:"200px" }} >No Data</h3>
+      :
+      <div class="row g-3 mb-3">
 
-        <div class="row g-3 mb-3">
+      {getViewApplicantDialysis?.map((month, index) => (
+                           <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" id="thumb">
+                           <div class="thumbBox">
+                             <p style={{ fontWeight: "bold" }}>Batch of {month.batch}</p>
+                             <p style={{ fontWeight: "bold",marginTop:"-20px" }}>Started #</p>
+                             <p style={{ fontWeight: "bold",marginTop:"-30px" }}>First Week of {month.batch}</p>
+                             <p style={{ fontWeight: "bold",marginTop:"-30px" }}>Ended #</p>
+                             <p style={{ fontWeight: "bold",marginTop:"-30px" }}>Last Week of {month.batch}</p>
+                           </div>
+                         </div>
+                       ))}
+  
+          </div>
+    }
 
-              <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" id="thumb">
-                <div class="thumbBox">
-                  <p style={{ fontWeight: "bold" }}>Batch of January 2023</p>
-                  <p style={{ fontWeight: "bold" }}>Started # July 7, 2003</p>
-                  <p style={{ fontWeight: "bold" }}>Ended # August 7, 2003</p>
-                </div>
-              </div>
-              <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" id="thumb">
-                <div class="thumbBox">
-                  <p style={{ fontWeight: "bold" }}>Batch of January 2023</p>
-                  <p style={{ fontWeight: "bold" }}>Started # July 7, 2003</p>
-                  <p style={{ fontWeight: "bold" }}>Ended # August 7, 2003</p>
-                </div>
-              </div>
-
-            </div>
 
 
 
@@ -934,30 +1148,33 @@ for (let i = 1; i <= 12; i++) {
       <div class="panel-body bio-graph-info">  
        
         
-        <h1 style={{marginTop:"30px !important", "text-decoration": "underline"}}>Dialysis History</h1>
+      <h1 style={{marginTop:"30px !important",}}>Total Batch of Dialysis Attended: {getViewApplicantDialysis?.length}</h1>
     
            
-        <div class="container-fluid" style={{ marginBottom: "-50px" }}>
+    <div class="container-fluid" style={{ marginBottom: "50px" }}>
 
+    {
+      getViewApplicantDialysis?.length == 0
+       ? 
+       <h3 style={{ fontWeight: "bold",marginBottom:"200px" }} >No Data</h3>
+      :
+      <div class="row g-3 mb-3">
 
-        <div class="row g-3 mb-3">
+      {getViewApplicantDialysis?.map((month, index) => (
+                           <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" id="thumb">
+                           <div class="thumbBox">
+                             <p style={{ fontWeight: "bold" }}>Batch of {month.batch}</p>
+                             <p style={{ fontWeight: "bold",marginTop:"-20px" }}>Started #</p>
+                             <p style={{ fontWeight: "bold",marginTop:"-30px" }}>First Week of {month.batch}</p>
+                             <p style={{ fontWeight: "bold",marginTop:"-30px" }}>Ended #</p>
+                             <p style={{ fontWeight: "bold",marginTop:"-30px" }}>Last Week of {month.batch}</p>
+                           </div>
+                         </div>
+                       ))}
+  
+          </div>
+    }
 
-              <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" id="thumb">
-                <div class="thumbBox">
-                  <p style={{ fontWeight: "bold" }}>Batch of January 2023</p>
-                  <p style={{ fontWeight: "bold" }}>Started # July 7, 2003</p>
-                  <p style={{ fontWeight: "bold" }}>Ended # August 7, 2003</p>
-                </div>
-              </div>
-              <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" id="thumb">
-                <div class="thumbBox">
-                  <p style={{ fontWeight: "bold" }}>Batch of January 2023</p>
-                  <p style={{ fontWeight: "bold" }}>Started # July 7, 2003</p>
-                  <p style={{ fontWeight: "bold" }}>Ended # August 7, 2003</p>
-                </div>
-              </div>
-
-            </div>
 
 
 
@@ -1057,6 +1274,190 @@ hr.sep-2 {
 }
 
 
+
+
+  /* PROJECTS */
+  .project-people,
+  .project-actions {
+    text-align: right;
+    vertical-align: middle;
+  }
+  dd.project-people {
+    text-align: left;
+    margin-top: 5px;
+  }
+  .project-people img {
+    width: 32px;
+    height: 32px;
+  }
+  .project-title a {
+    font-size: 14px;
+    color: #676a6c;
+    font-weight: 600;
+  }
+  .project-list table tr td {
+    border-top: none;
+    border-bottom: 1px solid #e7eaec;
+    padding: 15px 10px;
+    vertical-align: middle;
+  }
+  .project-manager .tag-list li a {
+    font-size: 10px;
+    background-color: white;
+    padding: 5px 12px;
+    color: inherit;
+    border-radius: 2px;
+    border: 1px solid #e7eaec;
+    margin-right: 5px;
+    margin-top: 5px;
+    display: block;
+  }
+  .project-files li a {
+    font-size: 11px;
+    color: #676a6c;
+    margin-left: 10px;
+    line-height: 22px;
+  }
+  
+  /* PROFILE */
+  .profile-content {
+    border-top: none !important;
+  }
+  .profile-stats {
+    margin-right: 10px;
+  }
+  .profile-image {
+    width: 120px;
+    float: left;
+  }
+  .profile-image img {
+    width: 96px;
+    height: 96px;
+  }
+  .profile-info {
+    margin-left: 120px;
+  }
+  .feed-activity-list .feed-element {
+    border-bottom: 1px solid #e7eaec;
+  }
+  .feed-element:first-child {
+    margin-top: 0;
+  }
+  .feed-element {
+    padding-bottom: 15px;
+  }
+  .feed-element,
+  .feed-element .media {
+    margin-top: 15px;
+  }
+  .feed-element,
+  .media-body {
+    overflow: hidden;
+  }
+  .feed-element > .pull-left {
+    margin-right: 10px;
+  }
+  .feed-element img.img-circle,
+  .dropdown-messages-box img.img-circle {
+    width: 38px;
+    height: 38px;
+  }
+  .feed-element .well {
+    border: 1px solid #e7eaec;
+    box-shadow: none;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .feed-element .actions {
+    margin-top: 10px;
+  }
+  .feed-element .photos {
+    margin: 10px 0;
+  }
+  .feed-photo {
+    max-height: 180px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  .file-list li {
+    padding: 5px 10px;
+    font-size: 11px;
+    border-radius: 2px;
+    border: 1px solid #e7eaec;
+    margin-bottom: 5px;
+  }
+  .file-list li a {
+    color: inherit;
+  }
+  .file-list li a:hover {
+    color: #1ab394;
+  }
+  .user-friends img {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+  
+  .ibox {
+    clear: both;
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding: 0;
+  }
+  .ibox.collapsed .ibox-content {
+    display: none;
+  }
+  .ibox.collapsed .fa.fa-chevron-up:before {
+    content: "\f078";
+  }
+  .ibox.collapsed .fa.fa-chevron-down:before {
+    content: "\f077";
+  }
+  .ibox:after,
+  .ibox:before {
+    display: table;
+  }
+  .ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffffff;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 14px 15px 7px;
+    min-height: 48px;
+  }
+  .ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0;
+  }
+  .ibox-footer {
+    color: inherit;
+    border-top: 1px solid #e7eaec;
+    font-size: 90%;
+    background: #ffffff;
+    padding: 10px 15px;
+  }
+  ul.notes li,
+  ul.tag-list li {
+    list-style: none;
+  }
         .vl {
           border-left: 2px solid #EF3A47;
           height: 50px;
@@ -1076,7 +1477,7 @@ hr.sep-2 {
       }
       
       .bio-graph-info {
-        color: #89817e;
+        color: black;
         margin: auto;
         background: white;
     }

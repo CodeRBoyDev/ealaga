@@ -12,11 +12,16 @@ exports.allDialysis = catchAsyncErrors(async (req, res, next) => {
     { date_schedule: moment().format('YYYY-MM-DD'), status:"attended", category: "Dialysis" }
   ).populate('user_id');
 
-  // console.log("listtttt", allDialysis);
+  const allDialysisPatient = await Schedule.find(
+    { dialysis_status:"accepted", status:"attended", category: "Dialysis" }
+  ).populate('user_id');
+
+  // console.log("listtttt", allDialysisPatient);
 
   return res.status(200).json({
 		success: true,
 		allDialysis,
+    allDialysisPatient
 	  })
 
 });
@@ -26,13 +31,20 @@ exports.viewApplicant = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params
 
   const allDialysis = await Schedule.findOne(
-    { _id: id ,date_schedule: moment().format('YYYY-MM-DD'), status:"attended", category: "Dialysis" }
+    { _id: id }
   ).populate('user_id');;
 
-  console.log(allDialysis)
+  const PatientallDialysis = await Schedule.find(
+    { user_id: allDialysis.user_id, dialysis_status:"accepted", category: "Dialysis" }
+  );
+
+
+  // console.log(PatientallDialysis.length)
+
   return res.status(200).json({
 		success: true,
 		allDialysis,
+    PatientallDialysis
 	  })
   
 })
