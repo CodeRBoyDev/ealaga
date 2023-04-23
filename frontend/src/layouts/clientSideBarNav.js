@@ -23,7 +23,7 @@ const SideBar = ({ isOpen, toggle }) => {
       <SidebarWrapper>
         <SidebarMenu>
           <SidebarLink to="/client/dashboard" onClick={toggle}>
-            Dashboard
+            Home
           </SidebarLink>
           <SidebarLink to="/client/chats" onClick={toggle}>
             Message

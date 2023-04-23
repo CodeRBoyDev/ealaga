@@ -66,11 +66,11 @@ const Navbar = ({ toggle }) => {
 
   const [getSpecificNotification, setSpecificNotification] = useState("");
 
-console.log(getSpecificNotification)
+// console.log(getSpecificNotification)
   
   const onClickNotif = () => {
 
-          console.log("dwadwadwadw");
+          // console.log("dwadwadwadw");
           axios({
             method:"post",
             url: `/api/notification/updateLength`,
@@ -98,7 +98,7 @@ console.log(getSpecificNotification)
     handleShow()
     setSpecificNotification("");
 
-    console.log(_id);
+    // console.log(_id);
     axios({
       method: "put",
       url: `/api/notification/updateNotif/${_id}`,
@@ -131,7 +131,7 @@ const handleShow = () => setShow(true);
 
 
 
-      console.log(getAllNotification)
+      // console.log(getAllNotification)
 
     const fetchAllNotification = () => {
       axios({
@@ -219,7 +219,7 @@ const handleShow = () => setShow(true);
               
               >
                  
-                Dashboard
+                Home
               </NavLinkR>
             </NavItem>
             <NavItem >

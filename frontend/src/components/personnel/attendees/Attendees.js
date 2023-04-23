@@ -1503,7 +1503,7 @@ console.log(response.data.qr_code)
                                               >
                                                   <option value="" selected disabled> <em>Select Category</em></option>
                                               <option value="Recreational Activity">Recreational Activity</option>
-                                              <option value="Dialysis">Dialysis</option>
+                                              <option value="Dialysis">Dialysis Consultation</option>
                                               <option value="Multipurpose Hall">Multipurpose Hall</option>
                                             </NativeSelect>
                                 </FormControl>
@@ -1762,7 +1762,7 @@ console.log(response.data.qr_code)
                                       >
                                          <option value="" selected disabled> <em>Select Category</em></option>
                                       <option value="Recreational Activity">Recreational Activity</option>
-                                      <option value="Dialysis">Dialysis</option>
+                                      <option value="Dialysis">Dialysis Consultation</option>
                                       <option value="Multipurpose Hall">Multipurpose Hall</option>
                                     </NativeSelect>
                                   </FormControl>

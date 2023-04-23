@@ -53,7 +53,9 @@ exports.schedule = async (req, res) => {
 	  const userRecreationalData = userActivity.flatMap((data) => data.requirement_id);
 	const totaluserRequirements = userRecreationalData.length;
 
-	//   console.log(totaluserRequirements)
+	const hasPresentOrFutureSchedule = userDialysis.some(dialysis => moment(dialysis.date_schedule).isSameOrAfter(moment()));
+
+	  console.log(hasPresentOrFutureSchedule)
 	  
 	  const userRecreationalSched = userRecreational.map((dates) => dates.date_schedule);
 	  const userMultipurposeSched = userMultipurpose.map((dates) => dates.date_schedule);
@@ -114,7 +116,8 @@ exports.schedule = async (req, res) => {
 		DialysisfutureDates,
 		totaluserRequirements,
 		closedateSched,
-		closedate
+		closedate,
+		hasPresentOrFutureSchedule
 	  })
 
 	} catch (err) {

@@ -22,7 +22,7 @@ import {
   ServicesIcon,
   ServicesP,ServicesH3B,ServicesH3,
   ServicesWrappers, BtnWrap,ServicesWrappers3, ServicesCard3, ServicesWrappers4,
-  ServicesCard4
+  ServicesCard4, DisableCard
 } from "./HeroImageElements";
 import { Transition } from 'react-transition-group';
 import Swal from 'sweetalert2'
@@ -135,6 +135,12 @@ const HeroImage = () => {
 
   const [slot_dialyis, fetchdialyis] = useState();
 
+  const [getLoadingPickService, setLoadingPickService] = useState(false);
+
+  const [getdialyisFutureSched, setdialyisFutureSched] = useState();
+
+  // console.log(getdialyisFutureSched)
+
   const [selectedDate, setDuelSlots] = useState();
   const [disableDate, setDisableDate] = useState();
   const [disableuserRecreationalSched, setDisableuserRecreationalSched] = useState();
@@ -178,6 +184,8 @@ const HeroImage = () => {
           setDialysisDialysisfutureDates(response.data.DialysisfutureDates);
           setTotaluserRequirements(response.data.totaluserRequirements);
 
+          setdialyisFutureSched(response.data.hasPresentOrFutureSchedule)
+          setLoadingPickService(true)
           fetchclosedateAll(response.data.closedate);
           fetchclosedate(response.data.closedateSched);
 
@@ -852,6 +860,24 @@ const HeroImage = () => {
           const handleShowMP = () => setShowMP(true);
           const handleShowDialysis = () => setShowDialysis(true);
 
+          const handleShowDialysisError = () => {
+            Swal.fire({
+              text: 'You cannot book a dialysis consultation as you have already scheduled one.',
+              color: '#EF3A47',
+              imageUrl: 'https://media1.giphy.com/media/fqIOmNAvFOaiQO9GFy/giphy.gif?cid=ecf05e47znz5hzwird0qfu43mht206tqfrhjhkira9fnkx5l&rid=giphy.gif&ct=s',
+              imageWidth: 200,
+              imageHeight: 200,
+              imageAlt: 'Custom image',
+              confirmButtonColor: '#EF3A47',
+              footer: '<a href="/#/client/activities" style="color:red;" id="view-status-link">Redirect to Schedule</a>',
+                allowOutsideClick: false,
+                allowEscapeKey: false
+              });
+              document.getElementById('view-status-link').addEventListener('click', function() {
+                Swal.close();
+              });
+          }
+
 
 
   return (
@@ -1459,42 +1485,74 @@ const HeroImage = () => {
       </>
       :
 
-    <>
-    <ServicesH1>Pick a Service
-        <h6 style={{color:"black"}}>Pick a service you want to avail</h6>
-        </ServicesH1>
-        <Fade left duration={2000} distance="40px">
-        <ServicesWrappers2>
-          {/* <ServicesCard2 onClick={()  => {setSelecServices({service:"recreational"})}}> */}
-          <ServicesCard2 onClick={()  => {handleShow()}}>
-            <ServicesIcon src={image3} />
-            <ServicesH2>Recreational Activities</ServicesH2>
-            <ServicesP>
-            A variety of services including Therapy Pool, Massage, Saunas, Yoga, Ballroom, Gym, Board Games, and Cinema for leisure and relaxation.
-            </ServicesP>
-          </ServicesCard2>
-          {/* <ServicesCard2 onClick={()  => {setSelecServices({service:"dialysis"})}}> */}
-          <ServicesCard2 onClick={()  => {handleShowDialysis()}}>
-            <ServicesIcon src={image4} />
-            <ServicesH2>Dialysis Consultation</ServicesH2>
-            <ServicesP>
-            A specialized medical evaluation that aims to determine eligibility for dialysis treatment through a comprehensive assessment by a healthcare provider with expertise in kidney disease.
-            </ServicesP>
-          </ServicesCard2>
-          {/* <ServicesCard2 onClick={()  => {setSelecServices({service:"multipurpose"})}}> */}
-          <ServicesCard2 onClick={()  => {handleShowMP()}}>
-            <ServicesIcon src={image5} />
-            <ServicesH2>Multi-Purpose Hall</ServicesH2>
-            <ServicesP>
-            A flexible space that can be used for a variety of events and activities, such as meetings, conferences, and social gatherings.
-            </ServicesP>
-          </ServicesCard2>
-        </ServicesWrappers2>
-        <BtnWrap>
-        <Button outline color="danger" onClick={()  => navigate('/client/dashboard')}>← Back</Button>
-        </BtnWrap>
-        </Fade>
+      
+        (!getLoadingPickService ?
+          <>
+          <ServicesH1>Pick a Service
+              <h6 style={{color:"black"}}>Pick a service you want to avail</h6>
+              </ServicesH1>
+        <div style={{ width: "100%",height: "100",display: "flex",justifyContent: "center",
+        alignItems: "center"}}><Circles color="#EF3A47" alignSelf='center' height={80} width={80}/></div>
         </>
+        :
+        
+        <>
+        <ServicesH1>Pick a Service
+            <h6 style={{color:"black"}}>Pick a service you want to avail</h6>
+            </ServicesH1>
+            <Fade left duration={2000} distance="40px">
+            <ServicesWrappers2>
+              {/* <ServicesCard2 onClick={()  => {setSelecServices({service:"recreational"})}}> */}
+              <ServicesCard2 onClick={()  => {handleShow()}}>
+                <ServicesIcon src={image3} />
+                <ServicesH2>Recreational Activities</ServicesH2>
+                <ServicesP>
+                A variety of services including Therapy Pool, Massage, Saunas, Yoga, Ballroom, Gym, Board Games, and Cinema for leisure and relaxation.
+                </ServicesP>
+              </ServicesCard2>
+              {/* <ServicesCard2 onClick={()  => {setSelecServices({service:"dialysis"})}}> */}
+            {
+              getdialyisFutureSched == true ?  
+              
+              <DisableCard onClick={()  => {handleShowDialysisError()}}>
+                <ServicesIcon src={image4} />
+                <ServicesH2>Dialysis Consultation</ServicesH2>
+                <ServicesP>
+                  A specialized medical evaluation that aims to determine eligibility for dialysis treatment through a comprehensive assessment by a healthcare provider with expertise in kidney disease.
+                </ServicesP>
+              </DisableCard>
+            
+              :
+              <>
+          
+              <ServicesCard2 onClick={()  => {handleShowDialysis()}}>
+                <ServicesIcon src={image4} />
+                <ServicesH2>Dialysis Consultation</ServicesH2>
+                <ServicesP>
+                A specialized medical evaluation that aims to determine eligibility for dialysis treatment through a comprehensive assessment by a healthcare provider with expertise in kidney disease.
+                </ServicesP>
+              </ServicesCard2>
+              </>
+            }
+              
+    
+              {/* <ServicesCard2 onClick={()  => {setSelecServices({service:"multipurpose"})}}> */}
+              <ServicesCard2 onClick={()  => {handleShowMP()}}>
+                <ServicesIcon src={image5} />
+                <ServicesH2>Multi-Purpose Hall</ServicesH2>
+                <ServicesP>
+                A flexible space that can be used for a variety of events and activities, such as meetings, conferences, and social gatherings.
+                </ServicesP>
+              </ServicesCard2>
+            </ServicesWrappers2>
+            <BtnWrap>
+            <Button outline color="danger" onClick={()  => navigate('/client/dashboard')}>← Back</Button>
+            </BtnWrap>
+            </Fade>
+            </>
+
+        )
+  
     }
 
 

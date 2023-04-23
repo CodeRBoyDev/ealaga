@@ -199,6 +199,63 @@ transition: all 0.3s ease-in-out ;
 }
 `;
 
+
+export const DisableCard = styled.div`
+  background: linear-gradient(to bottom,rgb(0 0 0 / 50%),rgb(255 255 255 / 0%));
+  display: flex;
+  border: 1px solid #FFFFFF;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 50px;
+  max-height: 95%;
+  min-height: 95%;
+  max-width: 110%;
+  min-width: 110%;
+  padding: 30px;
+  box-shadow: 0 5px 10px rgba(100, 100, 100, 0.6);
+
+
+  &:hover {
+    transform: scale(1.02);
+    transition: all 0.4 ease-in-out;
+    box-shadow: 0 5px 10px rgba(100, 100, 100, 0.6);
+    cursor: pointer;
+    h2 {
+      transition: all 0.4s ease-in-out ;
+      color: #EF3A47;
+    }
+
+  }
+
+  @media screen and (max-width: 1340px) {
+    max-height: 300px;
+  min-height: 300px;
+  max-width: 300px;
+  min-width: 300px;
+    margin: auto;
+    margin-left: -7%;
+  }
+
+  @media screen and (max-width: 780px) {
+    max-height: 300px;
+  min-height: 300px;
+  max-width: 300px;
+  min-width: 300px;
+    margin: auto;
+    margin-left: 100px;
+  }
+  @media screen and (max-width: 480px) {
+    max-height: 300px;
+  min-height: 300px;
+  max-width: 300px;
+  min-width: 300px;
+    margin: auto;
+    // margin-left: 50px;
+  }
+`;
+
+
 export const ServicesCard2 = styled.div`
   background: linear-gradient(to bottom, rgba(255,186,186,50%), rgba(255,186,186,0%));
   display: flex;
