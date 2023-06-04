@@ -11,12 +11,12 @@ const cloudinary = require("cloudinary");
 const Schedule = require("../models/schedule");
 const { google } = require("googleapis");
 const CLIENT_ID =
-  "245985647212-17ekq9p43o5e2u9iei49tmlhqaqqdouh.apps.googleusercontent.com";
-const CLIENT_SECRET = "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";
+  "674288789276-saaoh7tq48leiibdd223hb8ep3frqf5t.apps.googleusercontent.com";
+const CLIENT_SECRET = "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";
 const REDIRECT_URI = "https://developers.google.com/oauthplayground";
 const stream = require("stream");
 const REFRESH_TOKEN =
-  "1//04sTDhftwMYhLCgYIARAAGAQSNwF-L9Ir2gMbL1h39Mxidzg7hCQCbSAKJ84BVCNX9sGai1j8ojVbIsrfpi2jVjjmf1FqAp8g1Ds";
+  "1//04vtOReQoNI68CgYIARAAGAQSNwF-L9IrxqKFjSjYDxrumrKir2lBPInj3e_uqVSdeg5UKoRI3-Rd1reXf3ARX9Zmi2z9HfSO16s";
 const Readable = require("stream").Readable;
 const asyncHandler = require("express-async-handler");
 const moment = require("moment");
@@ -1686,7 +1686,7 @@ exports.profileUpdate = catchAsyncErrors(async (req, res, next) => {
     }
     const response = await drive.files.create({
       requestBody: {
-        parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+        parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
         name: profile_picture.name,
       },
       media: {
@@ -1713,7 +1713,7 @@ exports.profileUpdate = catchAsyncErrors(async (req, res, next) => {
 
     // const response = await drive.files.create({
     //   requestBody: {
-    //     'parents':  ['1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_'],
+    //     'parents':  ['1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW'],
     //   },
     //   media: {
     //     body: bs,
@@ -1759,7 +1759,7 @@ exports.profileUpdate = catchAsyncErrors(async (req, res, next) => {
     }
     const response = await drive.files.create({
       requestBody: {
-        parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+        parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
         name: valid_id.name,
       },
       media: {
@@ -1786,7 +1786,7 @@ exports.profileUpdate = catchAsyncErrors(async (req, res, next) => {
 
     // const response = await drive.files.create({
     //   requestBody: {
-    //     'parents':  ['1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_'],
+    //     'parents':  ['1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW'],
     //   },
     //   media: {
     //     body: bs,
@@ -1988,9 +1988,9 @@ exports.profileUpdateSubmit = catchAsyncErrors(async (req, res, next) => {
     //delete last picture
     const user = await User.findById(id);
     const image_id = user.profile_picture.public_id;
-    const responsedelete = await drive.files.delete({
-      fileId: image_id,
-    });
+    // const responsedelete = await drive.files.delete({
+    //   fileId: image_id,
+    // });
 
     //============= upload newww LARGE FILE
     function bufferToStream(buffer) {
@@ -2002,7 +2002,7 @@ exports.profileUpdateSubmit = catchAsyncErrors(async (req, res, next) => {
     }
     const response = await drive.files.create({
       requestBody: {
-        parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+        parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
         name: profile_picture.name,
       },
       media: {
@@ -2029,7 +2029,7 @@ exports.profileUpdateSubmit = catchAsyncErrors(async (req, res, next) => {
 
     // const response = await drive.files.create({
     //   requestBody: {
-    //     'parents':  ['1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_'],
+    //     'parents':  ['1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW'],
     //   },
     //   media: {
     //     body: bs,
@@ -2072,9 +2072,9 @@ exports.profileUpdateSubmit = catchAsyncErrors(async (req, res, next) => {
     //delete last picture
     const user = await User.findById(id);
     const image_id = user.valid_id.public_id;
-    const responsedelete = await drive.files.delete({
-      fileId: image_id,
-    });
+    // const responsedelete = await drive.files.delete({
+    //   fileId: image_id,
+    // });
 
     //============= upload newww LARGE FILE
     function bufferToStream(buffer) {
@@ -2086,7 +2086,7 @@ exports.profileUpdateSubmit = catchAsyncErrors(async (req, res, next) => {
     }
     const response = await drive.files.create({
       requestBody: {
-        parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+        parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
         name: valid_id.name,
       },
       media: {
@@ -2113,7 +2113,7 @@ exports.profileUpdateSubmit = catchAsyncErrors(async (req, res, next) => {
 
     // const response = await drive.files.create({
     //   requestBody: {
-    //     'parents':  ['1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_'],
+    //     'parents':  ['1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW'],
     //   },
     //   media: {
     //     body: bs,
@@ -2402,7 +2402,7 @@ exports.profileUpdateHealth = catchAsyncErrors(async (req, res, next) => {
     }
     const response = await drive.files.create({
       requestBody: {
-        parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+        parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
         name: medical_certificate.name,
       },
       media: {
@@ -2990,7 +2990,7 @@ exports.add = catchAsyncErrors(async (req, res, next) => {
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
             name: profile_picture.name,
           },
           media: {
@@ -3025,7 +3025,7 @@ exports.add = catchAsyncErrors(async (req, res, next) => {
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
             name: valid_id.name,
           },
           media: {
@@ -3229,7 +3229,7 @@ exports.add = catchAsyncErrors(async (req, res, next) => {
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
             name: profile_picture.name,
           },
           media: {
@@ -3584,7 +3584,7 @@ console.log("statysssssssssssssssssssssssss", account_statussss)
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
             name: profile_picture.name,
           },
           media: {
@@ -3619,7 +3619,7 @@ console.log("statysssssssssssssssssssssssss", account_statussss)
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
             name: valid_id.name,
           },
           media: {
@@ -3814,7 +3814,7 @@ console.log("statysssssssssssssssssssssssss", account_statussss)
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
             name: profile_picture.name,
           },
           media: {
@@ -3849,7 +3849,7 @@ console.log("statysssssssssssssssssssssssss", account_statussss)
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
+            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
             name: valid_id.name,
           },
           media: {
@@ -4180,7 +4180,7 @@ exports.downloadPDF = catchAsyncErrors(async (req, res, next) => {
   //                 // Upload file to Google Drive
   //                 const response = await drive.files.create({
   //                   requestBody: {
-  //                     parents: ['1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_'],
+  //                     parents: ['1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW'],
   //                     name: 'USER.pdf',
   //                   },
   //                   media: {
