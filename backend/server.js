@@ -29,7 +29,8 @@ const io = require("socket.io")(server, {
     cors: {
       // origin: "http://localhost:3000", //development
       // origin: "https://ealaga-server.onrender.com", //deployment
-      origin: "https://ealaga.vercel.app", //deployment
+      // origin: "https://ealaga.vercel.app", //deployment
+      origin: "https://staging-ealaga.vercel.app/", //deployment
       
 
       credentials: true,
