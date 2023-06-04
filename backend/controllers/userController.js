@@ -35,7 +35,7 @@ const drive = google.drive({
   auth: oauth2Client,
 });
 
-const url_server = "https://ealaga.vercel.app";
+const url_server = "https://staging-ealaga.vercel.app";
 
 exports.signin = async (req, res) => {
   const { email, password } = req.body;
