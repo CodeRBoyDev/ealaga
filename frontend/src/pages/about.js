@@ -49,8 +49,8 @@ function App() {
      <SideBar  isOpen={isOpen} toggle={toggle}/>
       <Navbar toggle={toggle} />
       <Hero />
-      <About {... homeObjOne} />
-      <Corevalues />
+      {/* <About {... homeObjOne} /> */}
+      {/* <Corevalues /> */}
       <Partnership />
       <Team />
       <Footer />

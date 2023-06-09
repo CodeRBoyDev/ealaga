@@ -1,11 +1,11 @@
 const Applicant = require('../models/applicant')
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const { google } = require('googleapis');
-const CLIENT_ID = '674288789276-saaoh7tq48leiibdd223hb8ep3frqf5t.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
+const CLIENT_ID = '245985647212-17ekq9p43o5e2u9iei49tmlhqaqqdouh.apps.googleusercontent.com';
+const CLIENT_SECRET = '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';
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
 const stream = require("stream");
-const REFRESH_TOKEN = '1//04vtOReQoNI68CgYIARAAGAQSNwF-L9IrxqKFjSjYDxrumrKir2lBPInj3e_uqVSdeg5UKoRI3-Rd1reXf3ARX9Zmi2z9HfSO16s';
+const REFRESH_TOKEN = '1//04sTDhftwMYhLCgYIARAAGAQSNwF-L9Ir2gMbL1h39Mxidzg7hCQCbSAKJ84BVCNX9sGai1j8ojVbIsrfpi2jVjjmf1FqAp8g1Ds';
 const Readable = require('stream').Readable; 
 const nodemailer = require('nodemailer');
 const ActivityLogs = require("../models/activitylogs");
