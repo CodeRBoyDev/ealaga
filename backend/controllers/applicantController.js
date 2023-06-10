@@ -67,7 +67,7 @@ exports.newApplicant = catchAsyncErrors(async(req,res,next) => {
                 }
                     const response = await drive.files.create({
                     requestBody: {
-                        'parents':  ['1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW'],
+                        'parents':  ['1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_'],
                         name: document.name,
                     },
                     media: {

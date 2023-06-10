@@ -1684,7 +1684,7 @@ exports.profileUpdate = catchAsyncErrors(async (req, res, next) => {
     }
     const response = await drive.files.create({
       requestBody: {
-        parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+        parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
         name: profile_picture.name,
       },
       media: {
@@ -1711,7 +1711,7 @@ exports.profileUpdate = catchAsyncErrors(async (req, res, next) => {
 
     // const response = await drive.files.create({
     //   requestBody: {
-    //     'parents':  ['1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW'],
+    //     'parents':  ['1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_'],
     //   },
     //   media: {
     //     body: bs,
@@ -1757,7 +1757,7 @@ exports.profileUpdate = catchAsyncErrors(async (req, res, next) => {
     }
     const response = await drive.files.create({
       requestBody: {
-        parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+        parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
         name: valid_id.name,
       },
       media: {
@@ -1784,7 +1784,7 @@ exports.profileUpdate = catchAsyncErrors(async (req, res, next) => {
 
     // const response = await drive.files.create({
     //   requestBody: {
-    //     'parents':  ['1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW'],
+    //     'parents':  ['1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_'],
     //   },
     //   media: {
     //     body: bs,
@@ -2000,7 +2000,7 @@ exports.profileUpdateSubmit = catchAsyncErrors(async (req, res, next) => {
     }
     const response = await drive.files.create({
       requestBody: {
-        parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+        parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
         name: profile_picture.name,
       },
       media: {
@@ -2027,7 +2027,7 @@ exports.profileUpdateSubmit = catchAsyncErrors(async (req, res, next) => {
 
     // const response = await drive.files.create({
     //   requestBody: {
-    //     'parents':  ['1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW'],
+    //     'parents':  ['1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_'],
     //   },
     //   media: {
     //     body: bs,
@@ -2084,7 +2084,7 @@ exports.profileUpdateSubmit = catchAsyncErrors(async (req, res, next) => {
     }
     const response = await drive.files.create({
       requestBody: {
-        parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+        parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
         name: valid_id.name,
       },
       media: {
@@ -2111,7 +2111,7 @@ exports.profileUpdateSubmit = catchAsyncErrors(async (req, res, next) => {
 
     // const response = await drive.files.create({
     //   requestBody: {
-    //     'parents':  ['1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW'],
+    //     'parents':  ['1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_'],
     //   },
     //   media: {
     //     body: bs,
@@ -2400,7 +2400,7 @@ exports.profileUpdateHealth = catchAsyncErrors(async (req, res, next) => {
     }
     const response = await drive.files.create({
       requestBody: {
-        parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+        parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
         name: medical_certificate.name,
       },
       media: {
@@ -2988,7 +2988,7 @@ exports.add = catchAsyncErrors(async (req, res, next) => {
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
             name: profile_picture.name,
           },
           media: {
@@ -3023,7 +3023,7 @@ exports.add = catchAsyncErrors(async (req, res, next) => {
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
             name: valid_id.name,
           },
           media: {
@@ -3227,7 +3227,7 @@ exports.add = catchAsyncErrors(async (req, res, next) => {
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
             name: profile_picture.name,
           },
           media: {
@@ -3582,7 +3582,7 @@ console.log("statysssssssssssssssssssssssss", account_statussss)
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
             name: profile_picture.name,
           },
           media: {
@@ -3617,7 +3617,7 @@ console.log("statysssssssssssssssssssssssss", account_statussss)
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
             name: valid_id.name,
           },
           media: {
@@ -3812,7 +3812,7 @@ console.log("statysssssssssssssssssssssssss", account_statussss)
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
             name: profile_picture.name,
           },
           media: {
@@ -3847,7 +3847,7 @@ console.log("statysssssssssssssssssssssssss", account_statussss)
         }
         const response = await drive.files.create({
           requestBody: {
-            parents: ["1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW"],
+            parents: ["1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_"],
             name: valid_id.name,
           },
           media: {
@@ -4178,7 +4178,7 @@ exports.downloadPDF = catchAsyncErrors(async (req, res, next) => {
   //                 // Upload file to Google Drive
   //                 const response = await drive.files.create({
   //                   requestBody: {
-  //                     parents: ['1FWxuky02TRwp1wwUXUNMD8j8w-XbWzRW'],
+  //                     parents: ['1Txj-XKNoGgfYkeuqojY_Bjzh8qkqDDJ_'],
   //                     name: 'USER.pdf',
   //                   },
   //                   media: {
