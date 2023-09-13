@@ -35,7 +35,7 @@ import { Circles } from  'react-loader-spinner'
 
 // const ENDPOINT = "https://ealaga.vercel.app"; //for deployment -production
 // const ENDPOINT = "https://ealaga-5v97.onrender.com/"; //for deployment -production
-const ENDPOINT = "https://ealaga-production.up.railway.app/"; //for deployment -production
+const ENDPOINT = 'https://web-production-6235.up.railway.app/';
 
 // const ENDPOINT = "https://ealaga-server.vercel.app"; //for deployment -production
 
