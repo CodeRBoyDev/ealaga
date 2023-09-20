@@ -61,9 +61,12 @@ export const App = styled.img`
   }
 
   @media only screen and (max-width: 480px) {
-    max-width: 50%;
+    max-width: 30%;
     height: auto;
     margin-top: -10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 

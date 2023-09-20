@@ -83,7 +83,7 @@ const HeroImage = () => {
         </AppStore> */}
         <AppStore>
           <a
-            href="https://expo.dev/artifacts/eas/ok29rqfcsoM4VFiJDg4X8s.apk"
+            href="https://mega.nz/file/WEEyQIBI#mAjqxUEET2bDTSH3g4F5zwdpdxhScxlyVoqfK3rDPko"
             rel="noopener noreferrer"
             target="_blank"
           >
@@ -102,13 +102,18 @@ const HeroImage = () => {
 
 
       <style>
-        {`
-
-        .qr-img {
-          animation: none !important;
-        }
-        `}
-      </style>
+  {`
+    @media (max-width: 767px) {
+      .qr-img {
+        max-width: 30%;
+        margin-left: 100px;
+      }
+    }
+    .qr-img {
+      animation: none !important;
+    }
+  `}
+</style>
 
 
     </HeroImageContainer>
